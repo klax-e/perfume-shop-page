@@ -74,7 +74,7 @@
           <div class="all-product-display-container">
             <div
               v-for="(perfume,index) in perfumeData"
-              @mouseover="changePerfume(index)"
+              @click="changePerfume(index)"
             >
               <img
                 v-bind:src="perfume.image"
