@@ -16,7 +16,43 @@
   </head>
   <body>
     <div id="app" class="main">
-        
+      <nav class="navbar">
+        <h1 class="logo">{{companyName}}</h1>
+        <button class="cart-btn btn">Cart ({{cart}})</button>
+      </nav>
+
+      <div class="product-container">
+        <div class="product-image-container">
+          <img
+            v-bind:src="perfumeData[selectedPerfume].image"
+            alt="image of the product"
+            class="image-container image-box"
+          />
+        </div>
+        <div class="product-details-container">
+          <p>Top Perfumes</p>
+          <h1>{{perfumeData[selectedPerfume].name}}</h1>
+          <p class="product-description">{{perfumeData[selectedPerfume].description}}</p>
+          <div class="price-section">
+            <p>Price</p>
+            <h3 class="price-set">
+              <span>${{perfumeData[selectedPerfume].price + 100}}</span>
+              ${{perfumeData[selectedPerfume].price}}
+            </h3>
+          </div>
+          <div class="size-section">
+            <p>Size</p>
+            <div class="size-btn-container">
+              <button
+                class="btn"
+                v-for="size in perfumeData[selectedPerfume].sizes"
+              >
+                {{size}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- main script -->
