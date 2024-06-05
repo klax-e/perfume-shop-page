@@ -7,6 +7,14 @@
 
     <!-- styles -->
     <link rel="stylesheet" href="style.css" />
+    <!-- icon library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- Vue js cdn -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- font variety -->
@@ -30,9 +38,27 @@
           />
         </div>
         <div class="product-details-container">
-          <p>Top Perfumes</p>
-          <h1>{{perfumeData[selectedPerfume].name}}</h1>
-          <p class="product-description">{{perfumeData[selectedPerfume].description}}</p>
+          <div class="product-info">
+            <p>Top Perfumes</p>
+            <h1>{{perfumeData[selectedPerfume].name}}</h1>
+            <p class="product-description">
+              {{perfumeData[selectedPerfume].description}}
+            </p>
+          </div>
+          <div class="rating-section">
+            <p>Rating & reviews</p>
+            <h3 class="rating-set">
+              <span v-for="n in numberOfStars" :key="n">
+                <i
+                  class="fa-solid fa-star"
+                  v-if="n < perfumeData[selectedPerfume].rating"
+                ></i
+              ><i class="fa-regular fa-star" v-else></i>
+            
+            </span>
+              ({{perfumeData[selectedPerfume].reviewCount}})
+            </h3>
+          </div>
           <div class="price-section">
             <p>Price</p>
             <h3 class="price-set">
@@ -40,15 +66,21 @@
               ${{perfumeData[selectedPerfume].price}}
             </h3>
           </div>
-          <div class="size-section">
-            <p>Size</p>
-            <div class="size-btn-container">
-              <button
-                class="btn"
-                v-for="size in perfumeData[selectedPerfume].sizes"
-              >
-                {{size}}
-              </button>
+
+          <button class="add-to-cart-btn btn" v-on:click="addToCart">
+            Add to Cart
+          </button>
+
+          <div class="all-product-display-container">
+            <div
+              v-for="(perfume,index) in perfumeData"
+              @mouseover="changePerfume(index)"
+            >
+              <img
+                v-bind:src="perfume.image"
+                alt="image of the product"
+                class="image-box"
+              />
             </div>
           </div>
         </div>
